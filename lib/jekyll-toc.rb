@@ -26,7 +26,7 @@ module Jekyll
     end
 
     def inject_anchors(html)
-      return html unless toc_enabled?
+      return html unless inject_anchors_enabled?
 
       TableOfContents::Parser.new(html, toc_config).inject_anchors_into_html
     end
@@ -41,6 +41,10 @@ module Jekyll
 
     def toc_enabled?
       @context.registers[:page]['toc'] == true
+    end
+
+    def inject_anchors_enabled?
+      @context.registers[:page]['inject_anchors'] == true
     end
 
     def toc_config
